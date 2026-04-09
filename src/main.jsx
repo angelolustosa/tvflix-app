@@ -4,11 +4,16 @@ import './index.css'
 import App from './App.jsx'
 import { Home } from './pages/Home.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { MovieDetail } from './pages/MovieDetail.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/filme/:id",
+    element: <MovieDetail />,
   },
 ]);
 
