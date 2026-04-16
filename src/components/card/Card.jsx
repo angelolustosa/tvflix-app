@@ -1,9 +1,15 @@
-import React from 'react'
-import { formatDate } from '../../util/DateUtil'
+import { useNavigate } from 'react-router-dom'
 
-export const Card = ({ title, date, image }) => {
+export const Card = ({ id, title, date, image, vote }) => {
+
+    const navigate = useNavigate()
+
     return (
-        <div className="col-6 col-sm-4 col-md-3 mb-4">
+        <div
+            className="col-6 col-sm-4 col-md-3"
+            onClick={() => navigate(`/filme/${id}`)}
+            style={{ cursor: 'pointer' }}
+        >
             <div className="movie-card">
                 <img
                     src={`https://image.tmdb.org/t/p/w500${image}`}
@@ -12,7 +18,6 @@ export const Card = ({ title, date, image }) => {
                 />
                 <div className="card-body movie-info">
                     <div className="movie-title">{title}</div>
-                    <div className="movie-date">{date && formatDate(date)}</div>
                 </div>
             </div>
         </div>
