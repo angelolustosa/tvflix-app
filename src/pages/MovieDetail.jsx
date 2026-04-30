@@ -1,107 +1,94 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import './MovieDetail.css'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./MovieDetail.css";
 
 export const MovieDetail = () => {
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
 
-    const { id } = useParams()
-    const navigate = useNavigate()
+  const formatDate = (date) => {
+    if (!date) return "";
+    return new Date(date).toLocaleDateString("pt-BR");
+  };
 
-    const [movie, setMovie] = useState(null)
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}?language=pt-BR`,
+          {
+            headers: {
+              Authorization: "Bearer SUA_TOKEN_AQUI",
+            },
+          },
+        );
 
-    const formatDate = (date) => {
-        if (!date) return ''
-        return new Date(date).toLocaleDateString('pt-BR')
-    }
+        setMovie(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-    const renderStars = (vote) => {
-        const rating = vote / 2
-        const fullStars = Math.floor(rating)
-        const hasHalf = rating % 1 >= 0.5
+    fetchMovie();
+  }, [id]);
 
-        let stars = ''
-        for (let i = 0; i < fullStars; i++) stars += '⭐'
-        if (hasHalf) stars += '✨'
+  if (!movie) return <div className="loading">Carregando...</div>;
 
-        return stars
-    }
+  const genres = movie.genres?.map((g) => g.name).join(", ");
+  const year = movie.release_date?.split("-")[0];
 
-    const getMovie = async () => {
-        try {
-            const response = await axios.get(
-                `https://api.themoviedb.org/3/movie/${id}?language=pt-BR`,
-                {
-                    headers: {
-                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OGU3MDFkYjNmNTUyZTBhNTFjMDlkNDMxMzdiZDI3MCIsIm5iZiI6MTY4ODczMDA1NC44NzgsInN1YiI6IjY0YTdmOWM2OTY1MjIwMDExZGYwOGU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YhX8YDb0OF8ovacEzdWjUTSWr0xZLaZOItyxsnzgVMI'
-                    }
-                }
-            )
+  return (
+    <>
+      <nav className="navbar navbar-dark bg-dark fixed-top">
+        <div className="container">
+          <a className="navbar-brand" href="/">
+            TV Flix
+          </a>
+        </div>
+      </nav>
 
-            setMovie(response.data)
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-        getMovie()
-    }, [id])
-
-    if (!movie) return <div>Carregando...</div>
-
-    return (
-        <section
-            className="movie-detail"
-            style={{
-                backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
-            }}
-        >
-            <div className="overlay">
-
-                <div className="container">
-
-                    {/* botão voltar */}
-                    <button onClick={() => navigate(-1)}>
-                        ← Voltar
-                    </button>
-
-                    <div className="movie-content">
-
-                        <div className="movie-poster">
-                            <img
-                                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                alt={movie.title}
-                            />
-                        </div>
-
-                        <div className="movie-info">
-
-                            <h1 className="movie-title">
-                                {movie.title}
-                            </h1>
-
-                            <div className="movie-meta">
-                                <span>{formatDate(movie.release_date)}</span>
-                                <span>{renderStars(movie.vote_average)}</span>
-                            </div>
-
-                            <div className="movie-genres">
-                                {movie.genres?.map(g => g.name).join(', ')}
-                            </div>
-
-                            <p className="movie-overview">
-                                {movie.overview}
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+      <div
+        className="movie-banner"
+        style={{
+          backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+        }}
+      >
+        <div className="movie-content container">
+          <div className="row align-items-center">
+            <div className="col-md-4">
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                className="poster"
+                alt={movie.title}
+              />
             </div>
-        </section>
-    )
-}
+
+            <div className="col-md-8">
+              <h1>
+                {movie.title} <span>({year})</span>
+              </h1>
+
+              <p className="movie-meta">
+                {formatDate(movie.release_date)} • {genres} • {movie.runtime}{" "}
+                min
+              </p>
+
+              <div class="d-flex align-items-center gap-3 my-3">
+                <div class="rating-circle">
+                  {Math.round(movie.vote_average * 10)}%
+                </div>
+                <span class="movieTitle">Avaliação dos usuários</span>
+              </div>
+
+              <h5 className="tagline">{movie.tagline}</h5>
+
+              <h4 className="mt-4">Sinopse</h4>
+              <p>{movie.overview}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
