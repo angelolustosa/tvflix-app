@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./MovieDetail.css";
+import { Navbar } from "../components/navbar/Navbar.jsx";
 
 export const MovieDetail = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ export const MovieDetail = () => {
           `https://api.themoviedb.org/3/movie/${id}?language=pt-BR`,
           {
             headers: {
-              Authorization: "Bearer SUA_TOKEN_AQUI",
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OGU3MDFkYjNmNTUyZTBhNTFjMDlkNDMxMzdiZDI3MCIsIm5iZiI6MTY4ODczMDA1NC44NzgsInN1YiI6IjY0YTdmOWM2OTY1MjIwMDExZGYwOGU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YhX8YDb0OF8ovacEzdWjUTSWr0xZLaZOItyxsnzgVMI'
             },
           },
         );
@@ -40,14 +41,6 @@ export const MovieDetail = () => {
 
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark fixed-top">
-        <div className="container">
-          <a className="navbar-brand" href="/">
-            TV Flix
-          </a>
-        </div>
-      </nav>
-
       <div
         className="movie-banner"
         style={{

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { formatDate } from '../../util/DateUtil.js'
 
 export const Card = ({ id, title, date, image, vote }) => {
 
@@ -18,6 +19,7 @@ export const Card = ({ id, title, date, image, vote }) => {
                 />
                 <div className="card-body movie-info">
                     <div className="movie-title">{title}</div>
+                    <div className="movie-date">{date && formatDate(date)}</div>
                 </div>
             </div>
         </div>
