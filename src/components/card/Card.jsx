@@ -1,7 +1,8 @@
-import React from 'react'
-import { formatDate } from '../../util/DateUtil'
+import { formatDate } from "../../util/DateUtil"
+
 
 export const Card = ({ title, date, image }) => {
+
     return (
         <div className="col-6 col-sm-4 col-md-3 mb-4">
             <div className="movie-card">

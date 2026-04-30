@@ -1,0 +1,57 @@
+/* Footer principal */
+.footer {
+  background-color: #032541;
+  color: #ccc;
+  padding: 50px 0 20px;
+  margin-top: 60px;
+}
+
+/* Marca */
+.footer-brand {
+  color: #01b4e4;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Títulos das colunas */
+.footer-title {
+  color: #fff;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* Texto */
+.footer-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Lista */
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list li {
+  margin-bottom: 8px;
+}
+
+/* Links */
+.footer-list a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.footer-list a:hover {
+  color: #01b4e4;
+}
+
+/* Linha inferior */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 20px;
+  padding-top: 15px;
+  font-size: 0.85rem;
+}

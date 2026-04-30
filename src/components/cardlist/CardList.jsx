@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Card } from '../card/Card'
 
 export const CardList = () => {
-
     const [movies, setMovies] = useState([])
 
     const getMoviews = async () => {
@@ -11,7 +10,7 @@ export const CardList = () => {
             const config = {
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer SEU_TOKEN_AQUI'
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OGU3MDFkYjNmNTUyZTBhNTFjMDlkNDMxMzdiZDI3MCIsIm5iZiI6MTY4ODczMDA1NC44NzgsInN1YiI6IjY0YTdmOWM2OTY1MjIwMDExZGYwOGU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YhX8YDb0OF8ovacEzdWjUTSWr0xZLaZOItyxsnzgVMI'
                 }
             }
 
@@ -19,7 +18,7 @@ export const CardList = () => {
                 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
                 config
             )
-
+            console.log('filmes:', response.data.results)
             setMovies(response.data.results)
 
         } catch (error) {
@@ -38,8 +37,7 @@ export const CardList = () => {
             <div className="row">
                 {movies.map((movie) => (
                     <Card
-                        key={movie.id}
-                        title={movie.title}
+                        title={movie.original_title}
                         date={movie.release_date}
                         image={movie.poster_path}
                     />

@@ -1,34 +1,60 @@
-import React from 'react'
+import './Footer.css';
 
 export const Footer = () => {
   return (
-    <footer class="footer d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <footer className="footer">
+      <div className="container">
+        <div className="row">
 
-      {/* Esquerda */}
-      <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-md-start">
-        <span class="text-footer small">
-          © 2026 TV Flix
-        </span>
+          {/* Logo / descrição */}
+          <div className="col-md-3 mb-4">
+            <h5 className="footer-brand">TV Flix</h5>
+            <p className="footer-text">
+              Explore filmes e séries populares, descubra novidades e encontre
+              seu próximo favorito.
+            </p>
+          </div>
+
+          {/* Navegação */}
+          <div className="col-md-3 mb-4">
+            <h6 className="footer-title">Navegação</h6>
+            <ul className="footer-list">
+              <li><a href="#carouselSection">Destaques</a></li>
+              <li><a href="/series">Séries</a></li>
+              <li><a href="/filmes">Filmes</a></li>
+              <li><a href="/pesquisa">Pesquisar</a></li>
+            </ul>
+          </div>
+
+          {/* Conteúdo */}
+          <div className="col-md-3 mb-4">
+            <h6 className="footer-title">Conteúdo</h6>
+            <ul className="footer-list">
+              <li><a href="#">Populares</a></li>
+              <li><a href="#">Mais votados</a></li>
+              <li><a href="#">Lançamentos</a></li>
+              <li><a href="#">Em alta</a></li>
+            </ul>
+          </div>
+
+          {/* Contato / Social */}
+          <div className="col-md-3 mb-4">
+            <h6 className="footer-title">Contato</h6>
+            <ul className="footer-list">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Sobre</a></li>
+              <li><a href="#">Ajuda</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Linha inferior */}
+        <div className="footer-bottom text-center">
+          <p>© {new Date().getFullYear()} TV Flix • Todos os direitos reservados</p>
+        </div>
       </div>
-
-      {/* Centro (LOGO) */}
-      <div class="col-md-4 text-center">
-        <a class="navbar-brand" href="index.html">TV Flix</a>
-      </div>
-
-      {/* Direita */}
-      <ul class="nav col-md-4 justify-content-center justify-content-md-end list-unstyled d-flex">
-        <li class="ms-3">
-          <a class="text-footer" href="#"><i class="fab fa-github"></i></a>
-        </li>
-        <li class="ms-3">
-          <a class="text-footer" href="#"><i class="fab fa-linkedin"></i></a>
-        </li>
-        <li class="ms-3">
-          <a class="text-footer" href="#"><i class="fab fa-instagram"></i></a>
-        </li>
-      </ul>
-
     </footer>
-  )
-}
+  );
+};
