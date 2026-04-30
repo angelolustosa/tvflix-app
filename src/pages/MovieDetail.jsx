@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./MovieDetail.css";
-import { Navbar } from "../components/navbar/Navbar.jsx";
+import { RatingCircle } from "../components/rating/RatingCircle.jsx";
 
 export const MovieDetail = () => {
   const { id } = useParams();
@@ -20,7 +20,8 @@ export const MovieDetail = () => {
           `https://api.themoviedb.org/3/movie/${id}?language=pt-BR`,
           {
             headers: {
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OGU3MDFkYjNmNTUyZTBhNTFjMDlkNDMxMzdiZDI3MCIsIm5iZiI6MTY4ODczMDA1NC44NzgsInN1YiI6IjY0YTdmOWM2OTY1MjIwMDExZGYwOGU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YhX8YDb0OF8ovacEzdWjUTSWr0xZLaZOItyxsnzgVMI'
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OGU3MDFkYjNmNTUyZTBhNTFjMDlkNDMxMzdiZDI3MCIsIm5iZiI6MTY4ODczMDA1NC44NzgsInN1YiI6IjY0YTdmOWM2OTY1MjIwMDExZGYwOGU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YhX8YDb0OF8ovacEzdWjUTSWr0xZLaZOItyxsnzgVMI",
             },
           },
         );
@@ -68,12 +69,11 @@ export const MovieDetail = () => {
               </p>
 
               <div class="d-flex align-items-center gap-3 my-3">
-                <div class="rating-circle">
-                  {Math.round(movie.vote_average * 10)}%
-                </div>
-                <span class="movieTitle">Avaliação dos usuários</span>
+                <RatingCircle
+                  value={movie.vote_average}
+                  text="Avaliação dos usuários"
+                />
               </div>
-
               <h5 className="tagline">{movie.tagline}</h5>
 
               <h4 className="mt-4">Sinopse</h4>
